@@ -1,0 +1,19 @@
+.nav {
+  background-color: red;
+}
+
+.nav ul {
+  list-style: none;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+/* making global test class, if we have to define the global css in css module this is how we do it*/
+:global(.test) {
+  background-color: yellow;
+}
+
+.nav :global(.active) {
+  background-color: green;
+}
