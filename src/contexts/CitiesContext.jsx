@@ -37,8 +37,52 @@ function CitiesProvider({ children }) {
     }
   }
 
+  async function createCity(newCity) {
+    try {
+      setIsLoading(true);
+      const res = await fetch(`${BASE_URL}/cities`, {
+        method: "POST",
+        body: JSON.stringify(newCity),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      console.log("create City Data");
+      setCities((cities) => [...cities, data]); // updating the states with spreading
+    } catch {
+      alert("there is an Error");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  async function deleteCity(id) {
+    try {
+      setIsLoading(true);
+      await fetch(`${BASE_URL}/cities/${id}`, {
+        method: "DELETE",
+      });
+      console.log("create City Data");
+      setCities((cities) => cities.filter((city) => city.id !== id)); // removing with filter
+    } catch {
+      alert("there is an Error creating a city");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   return (
-    <CitiesContext.Provider value={{ cities, isLoading, currentCity, getCity }}>
+    <CitiesContext.Provider
+      value={{
+        cities,
+        isLoading,
+        currentCity,
+        getCity,
+        createCity,
+        deleteCity,
+      }}
+    >
       {children}
     </CitiesContext.Provider>
   );
@@ -49,7 +93,7 @@ function useCities() {
 
   if (context === undefined)
     throw new Error("CitiesContent is used outside the CitiesProvider");
-  console.log(context);
+  // console.log(context);
   return context;
 }
 
