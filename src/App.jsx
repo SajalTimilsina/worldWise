@@ -11,6 +11,8 @@ import City from "./components/City";
 import Form from "./components/Form";
 import { CitiesProvider, useCities } from "./contexts/CitiesContext";
 
+//storing user into state
+
 const BASE_URL = "http://localhost:8000";
 
 function App() {
