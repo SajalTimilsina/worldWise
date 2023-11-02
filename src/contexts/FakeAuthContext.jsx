@@ -3,7 +3,7 @@ import { createContext, useContext, useReducer } from "react";
 const AuthContext = createContext();
 const initialState = {
   user: null,
-  isAuththenticated: false,
+  isAuthenticated: false,
 };
 
 function reducer(state, action) {
@@ -13,14 +13,14 @@ function reducer(state, action) {
         // even if we only have 2 initial state and we changed all of them we have to add ...state to  make it fucture proof
         ...state,
         user: action.payload,
-        isAuththenticated: true,
+        isAuthenticated: true,
       };
 
     case "logout":
-      return { ...state, user: null, isAuththenticated: false };
+      return { ...state, user: null, isAuthenticated: false };
 
     default:
-      throw new Error("UnKnow action");
+      throw new Error("UnKnown action");
   }
 }
 
@@ -32,7 +32,7 @@ const FAKE_USER = {
 };
 
 function AuthProvider({ children }) {
-  const [{ user, isAuththenticated, dispatch }] = useReducer(
+  const [{ user, isAuthenticated }, dispatch] = useReducer(
     reducer,
     initialState
   );
@@ -46,7 +46,7 @@ function AuthProvider({ children }) {
     dispatch({ type: "logout" });
   }
   return (
-    <AuthContext.Provider value={{ user, isAuththenticated, login, logout }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
@@ -56,7 +56,7 @@ function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined)
     throw new Error("AuthContext is used outside auth provider");
-  return;
+  return context;
 }
 
 export { AuthProvider, useAuth };
