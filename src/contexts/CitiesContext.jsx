@@ -5,7 +5,7 @@ import {
   useReducer,
   useState,
 } from "react";
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = "https://worldwise1.netlify.app";
 
 const CitiesContext = createContext();
 const initialState = {
