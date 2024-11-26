@@ -5,7 +5,7 @@ import {
   useReducer,
   useState,
 } from "react";
-const BASE_URL = "https://worldwise1.netlify.app:8000";
+const BASE_URL = "https://vercel-chi-nine-73.vercel.app"; // will be using .env file
 
 const CitiesContext = createContext();
 const initialState = {
